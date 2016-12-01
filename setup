@@ -1,0 +1,22 @@
+#!/bin/bash
+#--------------------------------------------------
+# Provision Ubuntu instance as a Nexus server
+#--------------------------------------------------
+
+export REPO_OWNER="neopragma"
+export INSTALL_DIR="$HOME/provision-ubuntu-nexus"
+export COMMON_DIR="provision-ubuntu-common"
+export HOME_BIN="$HOME/bin"
+
+# Ensure the common provisioning scripts are installed
+
+if [ ! -d "$COMMON_DIR" ]; then
+    git clone "http://github.com/$REPO_OWNER/$COMMON_DIR"
+fi
+
+# Provision the instance
+
+"./$COMMON_DIR/create_home_bin"
+"./$COMMON_DIR/apply_updates"
+"./$COMMON_DIR/install_wget"
+"./$COMMON_DIR/install_nexus_oss"
